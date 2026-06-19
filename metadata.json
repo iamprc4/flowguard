@@ -1,0 +1,8 @@
+{
+  "name": "Remix: My Closet - Final Step",
+  "description": "FlowGuard is a premium AI-powered traffic intelligence platform that predicts event-driven congestion and orchestrates real-time diversion routes, deployments, and policing resources.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

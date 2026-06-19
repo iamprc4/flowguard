@@ -1,0 +1,101 @@
+[
+  {
+    "sensorId": "BTP-SEN-081",
+    "junction": "Silk Board Junction",
+    "location": "Hosur Road - Outer Ring Road Interchange",
+    "avgSpeedKmh": 7,
+    "congestionIndex": 98,
+    "peakHours": "08:30 AM - 11:30 AM, 05:30 PM - 09:30 PM",
+    "trend": "increasing",
+    "primaryBottleneckReason": "Metro Line construction lane constriction & heavy IT corridor toll merging",
+    "affectedSectors": ["HSR Layout", "BTM Layout", "Madiwala", "Electronic City", "Koromangala"]
+  },
+  {
+    "sensorId": "BTP-SEN-022",
+    "junction": "Hebbal Flyover",
+    "location": "Bellary Road - Outer Ring Road Merge",
+    "avgSpeedKmh": 16,
+    "congestionIndex": 84,
+    "peakHours": "08:00 AM - 11:00 AM, 05:30 PM - 08:45 PM",
+    "trend": "stable",
+    "primaryBottleneckReason": "Confluence of traffic from Kempegowda International Airport with city arterial lanes",
+    "affectedSectors": ["Hebbal", "Ganga Nagar", "Sahakar Nagar", "Yelahanka", "RT Nagar"]
+  },
+  {
+    "sensorId": "BTP-SEN-105",
+    "junction": "Tin Factory (K.R. Puram)",
+    "location": "Old Madras Road - Outer Ring Road Confluence",
+    "avgSpeedKmh": 10,
+    "congestionIndex": 93,
+    "peakHours": "08:30 AM - 11:30 AM, 05:00 PM - 09:15 PM",
+    "trend": "increasing",
+    "primaryBottleneckReason": "Station boarding friction, auto-rickshaw halting, and massive highway merge bottlenecks",
+    "affectedSectors": ["K.R. Puram", "Mahadevapura", "Kasturi Nagar", "C.V. Raman Nagar", "Ramamurthy Nagar"]
+  },
+  {
+    "sensorId": "BTP-SEN-056",
+    "junction": "Marathahalli ORR Grid",
+    "location": "Sarjapur - Marathahalli Outer Ring Road IT Corridor",
+    "avgSpeedKmh": 12,
+    "congestionIndex": 89,
+    "peakHours": "09:00 AM - 11:30 AM, 05:15 PM - 08:30 PM",
+    "trend": "fluctuating",
+    "primaryBottleneckReason": "Massive corporate tech park commuter waves (RMZ Ecospace, Prestige Tech Park exiting)",
+    "affectedSectors": ["Marathahalli", "Bellandur", "Sarjapur", "Kadubeesanahalli", "Varthur"]
+  },
+  {
+    "sensorId": "BTP-SEN-014",
+    "junction": "Goraguntepalya",
+    "location": "Tumkur Road - Outer Ring Road Junction",
+    "avgSpeedKmh": 14,
+    "congestionIndex": 81,
+    "peakHours": "08:00 AM - 10:30 AM, 06:00 PM - 09:00 PM",
+    "trend": "stable",
+    "primaryBottleneckReason": "Heavy commercial transport truck ingress/egress bottlenecking with local city commuters",
+    "affectedSectors": ["Yeshwanthpur", "Goraguntepalya", "Peenya Industrial Area", "Nagasandra"]
+  },
+  {
+    "sensorId": "BTP-SEN-042",
+    "junction": "Richmond Road",
+    "location": "Richmond Circle & Residency Road One-ways",
+    "avgSpeedKmh": 15,
+    "congestionIndex": 76,
+    "peakHours": "09:30 AM - 11:00 AM, 05:30 PM - 08:00 PM",
+    "trend": "decreasing",
+    "primaryBottleneckReason": "Central Business District high-density office exits and schools dispersal congestion",
+    "affectedSectors": ["Richmond Town", "MG Road", "Brigade Road", "Ashok Nagar", "Shanti Nagar"]
+  },
+  {
+    "sensorId": "BTP-SEN-069",
+    "junction": "Whitefield ITPL",
+    "location": "ITPL Main Road & Hoodi Junction Corridor",
+    "avgSpeedKmh": 11,
+    "congestionIndex": 85,
+    "peakHours": "08:45 AM - 11:15 AM, 05:45 PM - 08:15 PM",
+    "trend": "increasing",
+    "primaryBottleneckReason": "Tech park exit bottlenecks, side lane excavations, and high freight truck density",
+    "affectedSectors": ["Whitefield", "Hoodi", "Garudacharpalya", "Brookefield", "Kadugodi"]
+  },
+  {
+    "sensorId": "BTP-SEN-033",
+    "junction": "Bull Temple Road",
+    "location": "Basavanagudi - Bugle Rock Sannidhi Street Corridor",
+    "avgSpeedKmh": 25,
+    "congestionIndex": 42,
+    "peakHours": "10:00 AM - 12:30 PM, 05:00 PM - 08:30 PM",
+    "trend": "fluctuating",
+    "primaryBottleneckReason": "Traditional markets shopping traffic and religious procession / fair blocks",
+    "affectedSectors": ["Basavanagudi", "Chamarajpet", "Gandhi Bazaar", "Jayanagar", "Hanumantha Nagar"]
+  },
+  {
+    "sensorId": "BTP-SEN-090",
+    "junction": "Electronic City Toll Gate",
+    "location": "Electronic City Expressway Phase 1 Entrance",
+    "avgSpeedKmh": 20,
+    "congestionIndex": 79,
+    "peakHours": "08:15 AM - 10:45 AM, 05:30 PM - 08:15 PM",
+    "trend": "stable",
+    "primaryBottleneckReason": "Toll booth slow mergers, high commuter bus volumes, and interchange transitions",
+    "affectedSectors": ["Electronic City Phase 1", "Phase 2", "Bommanahalli", "Veerasandra", "Singasandra"]
+  }
+]
