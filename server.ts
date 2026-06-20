@@ -18,8 +18,7 @@ import {
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = process.cwd();
 
 // Initialize Gemini Client safely without crashing on startup
 let ai: GoogleGenAI | null = null;
