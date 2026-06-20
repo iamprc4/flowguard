@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Sparkles, Navigation, Users, BarChart3, AlertOctagon, ArrowRight, Send, CheckCircle } from 'lucide-react';
+import { Shield, Sparkles, Navigation, Users, BarChart3, AlertOctagon, ArrowRight, Send, CheckCircle, Info } from 'lucide-react';
 
 interface LandingProps {
   onGoToLogin: () => void;
@@ -45,9 +45,10 @@ export default function LandingPage({ onGoToLogin }: LandingProps) {
           <a href="#features" className="text-gray-400 hover:text-white transition">Platform Overview</a>
           <a href="#workflow" className="text-gray-400 hover:text-white transition">AI Engine</a>
           <a href="#metrics" className="text-gray-400 hover:text-white transition">Impact Metrics</a>
+          <a href="#about" className="text-gray-400 hover:text-white transition">About</a>
           <a href="#contact" className="text-gray-400 hover:text-white transition">Contact Agency</a>
         </nav>
-        <button 
+        <button
           onClick={onGoToLogin}
           className="bg-slate-900 hover:bg-slate-800 text-white font-mono text-xs px-4.5 py-2.5 rounded-lg border border-white/10 hover:border-[#00C6FF]/50 transition flex items-center gap-2"
         >
@@ -68,7 +69,7 @@ export default function LandingPage({ onGoToLogin }: LandingProps) {
         </div>
 
         <h1 className="text-4xl md:text-6xl font-display font-bold tracking-tight text-white max-w-4xl leading-[1.10] m-0">
-          Predict Congestion, Optimize Manpower, <br className="hidden md:inline"/>
+          Predict Congestion, Optimize Manpower, <br className="hidden md:inline" />
           and <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00C6FF] to-[#7B61FF]">Secure Your City Lanes</span>
         </h1>
 
@@ -77,13 +78,13 @@ export default function LandingPage({ onGoToLogin }: LandingProps) {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center gap-4">
-          <button 
+          <button
             onClick={onGoToLogin}
             className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-[#00C6FF] to-[#7B61FF] text-slate-950 font-display font-bold rounded-xl shadow-lg hover:shadow-[#00C6FF]/20 transition transform hover:-translate-y-0.5 cursor-pointer"
           >
             Request Command Demo
           </button>
-          <button 
+          <button
             onClick={onGoToLogin}
             className="w-full sm:w-auto px-8 py-4 bg-slate-900 border border-white/10 hover:border-white/20 text-white font-display font-medium rounded-xl transition"
           >
@@ -154,16 +155,16 @@ export default function LandingPage({ onGoToLogin }: LandingProps) {
 
           <div className="glass-panel rounded-2xl p-6 border border-white/10 space-y-4 bg-slate-950/60 shadow-inner">
             <h3 className="text-sm font-mono text-[#00C6FF] uppercase tracking-wider m-0 border-b border-white/5 pb-3">AI Intelligence Prediction Audit Output</h3>
-            
+
             <div className="bg-slate-900/80 rounded-xl p-4 border border-white/5">
               <div className="flex justify-between items-center text-xs text-gray-400 mb-2 font-mono">
-                <span>SECTOR ID: WEST_GRID (Sector 4)</span>
+                <span>SECTOR ID: SOUTH_GRID (Mysore Road Corridor)</span>
                 <span className="text-[#FF5C5C] font-semibold animate-pulse">CRITICAL DISRUPTION</span>
               </div>
-              <h4 className="text-white text-base my-0 mb-1">Sector 4 Religious Procession</h4>
-              <p className="text-xs text-gray-400 leading-normal m-0 mb-3">Expected: 45,000 marchers closing off Main Avenue road segments.</p>
+              <h4 className="text-white text-base my-0 mb-1">Mysore Road Religious Procession</h4>
+              <p className="text-xs text-gray-400 leading-normal m-0 mb-3">Expected: 45,000 marchers closing off MG Road and Brigade Road corridors.</p>
               <div className="text-[11px] font-mono bg-slate-950 p-2.5 rounded text-gray-300 border border-white/5 font-sans leading-relaxed">
-                "Deploy 42 officers and 120 interlocking barricades in Old City Grid-4 starting 12:00 PM. Direct detour northward to avoid critical 48-minute gridlocks."
+                "Deploy 42 officers and 120 interlocking barricades along Mysore Road starting 12:00 PM. Direct detour northward via Chord Road to avoid critical 48-minute gridlocks."
               </div>
             </div>
 
@@ -221,26 +222,26 @@ export default function LandingPage({ onGoToLogin }: LandingProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="glass-panel rounded-2xl p-8 border border-white/5 relative">
             <p className="text-gray-300 text-sm md:text-base leading-relaxed italic mb-6 m-0">
-              "Ingesting stadium timelines and rally pathways directly into FlowGuard has completely changed our operational prep. During the last 75,000-person firework gathering, our gantry signs automatically rerouted 30% of traffic, shaving nearly 45 minutes off the sector's general clearance average."
+              "Ingesting Chinnaswamy Stadium match timelines and rally pathways directly into FlowGuard has completely changed our operational prep. During the last 75,000-person Karaga procession, our gantry signs automatically rerouted 30% of traffic on MG Road and Residency Road, shaving nearly 45 minutes off the sector's general clearance average."
             </p>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center font-bold text-xs text-[#00C6FF]">TC</div>
+              <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center font-bold text-xs text-[#00C6FF]">SR</div>
               <div>
-                <span className="text-white font-medium text-sm block">Marshal Timothy Cross</span>
-                <span className="text-xs text-gray-500">Metro Police Operations Chief</span>
+                <span className="text-white font-medium text-sm block">Suresh Reddy</span>
+                <span className="text-xs text-gray-500">Deputy Commissioner of Traffic, BBMP Traffic Division</span>
               </div>
             </div>
           </div>
 
           <div className="glass-panel rounded-2xl p-8 border border-white/5 relative">
             <p className="text-gray-300 text-sm md:text-base leading-relaxed italic mb-6 m-0">
-              "For private transport logistics, FlowGuard is indispensable. Knowing 24 hours in advance that road segments near Junction A will block because of water main repair lets our dispatchers reroute trucks to the Loop bypass, protecting our delivery SLA."
+              "For last-mile logistics, FlowGuard is indispensable. Knowing 24 hours in advance that road segments near Silk Board Junction will be blocked due to the Karaga procession lets our dispatchers reroute delivery trucks to the Outer Ring Road, protecting our SLA commitments."
             </p>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center font-bold text-xs text-[#7B61FF]">RA</div>
+              <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center font-bold text-xs text-[#7B61FF]">PN</div>
               <div>
-                <span className="text-white font-medium text-sm block">Rigoberto Alavez</span>
-                <span className="text-xs text-gray-500">Logistics Transport Coordinator</span>
+                <span className="text-white font-medium text-sm block">Priya Nair</span>
+                <span className="text-xs text-gray-500">Head of Last Mile Operations, Flipkart Logistics</span>
               </div>
             </div>
           </div>
@@ -269,21 +270,21 @@ export default function LandingPage({ onGoToLogin }: LandingProps) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-mono text-gray-400 uppercase mb-2">Officer Name</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     required
                     value={contactForm.name}
-                    onChange={e => setContactForm({...contactForm, name: e.target.value})}
+                    onChange={e => setContactForm({ ...contactForm, name: e.target.value })}
                     placeholder="e.g. Chief Inspector"
                     className="w-full bg-[#060A13] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#00C6FF] transition"
                   />
                 </div>
                 <div>
                   <label className="block text-xs font-mono text-gray-400 uppercase mb-2">Department / Agency</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     value={contactForm.agency}
-                    onChange={e => setContactForm({...contactForm, agency: e.target.value})}
+                    onChange={e => setContactForm({ ...contactForm, agency: e.target.value })}
                     placeholder="e.g. Department of Transit"
                     className="w-full bg-[#060A13] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#00C6FF] transition"
                   />
@@ -292,11 +293,11 @@ export default function LandingPage({ onGoToLogin }: LandingProps) {
 
               <div>
                 <label className="block text-xs font-mono text-gray-400 uppercase mb-2">Government / corporate Email</label>
-                <input 
-                  type="email" 
+                <input
+                  type="email"
                   required
                   value={contactForm.email}
-                  onChange={e => setContactForm({...contactForm, email: e.target.value})}
+                  onChange={e => setContactForm({ ...contactForm, email: e.target.value })}
                   placeholder="name@agency.gov"
                   className="w-full bg-[#060A13] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#00C6FF] transition"
                 />
@@ -304,16 +305,16 @@ export default function LandingPage({ onGoToLogin }: LandingProps) {
 
               <div>
                 <label className="block text-xs font-mono text-gray-400 uppercase mb-2">Message</label>
-                <textarea 
+                <textarea
                   rows={4}
                   value={contactForm.message}
-                  onChange={e => setContactForm({...contactForm, message: e.target.value})}
+                  onChange={e => setContactForm({ ...contactForm, message: e.target.value })}
                   placeholder="Detail your regional metrics or specific requirements..."
                   className="w-full bg-[#060A13] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#00C6FF] transition"
                 />
               </div>
 
-              <button 
+              <button
                 type="submit"
                 className="w-full bg-[#00C6FF] text-slate-950 font-display font-semibold hover:bg-opacity-90 py-3.5 rounded-xl transition flex items-center justify-center gap-2 cursor-pointer"
               >
@@ -326,15 +327,43 @@ export default function LandingPage({ onGoToLogin }: LandingProps) {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-950 py-12 px-6 md:px-12 text-center border-t border-white/5 text-xs text-gray-500">
-        <div className="flex items-center justify-center gap-2 mb-4">
-          <div className="w-6 h-6 bg-[#00C6FF] rounded-md rotate-12 flex items-center justify-center shadow-lg" />
-          <span className="font-display font-medium text-sm text-white">Flow<span className="text-[#00C6FF]">Guard</span></span>
+      <footer className="bg-slate-950 py-12 px-6 md:px-12 border-t border-white/5 text-xs text-gray-500">
+        <div className="max-w-7xl mx-auto">
+          {/* Team & Synopsis — hackathon submission requirement */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 pb-10 border-b border-white/5">
+            <div>
+              <span className="font-mono text-[10px] uppercase tracking-widest text-[#00C6FF] block mb-2">Team</span>
+              <p className="text-sm font-semibold text-white mb-1">Team FlowGuard</p>
+              <p className="text-gray-400 leading-relaxed">
+                B Shalini · Medha Sri · Pratithi Rani Chawla
+              </p>
+            </div>
+            <div>
+              <span className="font-mono text-[10px] uppercase tracking-widest text-[#00C6FF] block mb-2">Problem Statement</span>
+              <p className="text-gray-400 leading-relaxed">
+                Large-scale public events in Bengaluru cause severe, unplanned traffic congestion. City agencies lack predictive tools to pre-position officers and barricades before gridlocks form.
+              </p>
+            </div>
+            <div>
+              <span className="font-mono text-[10px] uppercase tracking-widest text-[#00C6FF] block mb-2">What FlowGuard Does</span>
+              <p className="text-gray-400 leading-relaxed">
+                FlowGuard uses event-driven AI to forecast congestion 24 hours ahead, auto-generate diversion routes, and recommend optimal officer deployment — turning reactive traffic management into proactive city coordination.
+              </p>
+            </div>
+          </div>
+
+          {/* Standard footer bottom */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 bg-[#00C6FF] rounded-md rotate-12 flex items-center justify-center shadow-lg" />
+              <span className="font-display font-medium text-sm text-white">Flow<span className="text-[#00C6FF]">Guard</span></span>
+            </div>
+            <p className="max-w-md leading-relaxed">
+              FlowGuard — AI-powered municipal traffic command for event-driven congestion. Submitted for HackerEarth Gridlock Hackathon 2.0.
+            </p>
+            <p className="font-mono text-[10px] shrink-0">© 2026 Team FlowGuard</p>
+          </div>
         </div>
-        <p className="max-w-md mx-auto leading-relaxed">
-          FlowGuard Municipal Traffic Intelligent Systems and Automated Dispatch Shield. Authorized personnel only. Access logs compiled actively.
-        </p>
-        <p className="mt-6 font-mono text-[10px]">© 2026 FlowGuard Security Services. All Rights Devoted.</p>
       </footer>
     </div>
   );

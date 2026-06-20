@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Shield, 
-  Map, 
-  Plus, 
-  Calendar, 
-  Navigation, 
-  Users, 
-  BarChart3, 
-  Bot, 
-  Bell, 
-  LogOut, 
-  Search, 
-  FileText, 
-  Terminal, 
-  Lock, 
-  Radio, 
-  User, 
+import {
+  Shield,
+  Map,
+  Plus,
+  Calendar,
+  Navigation,
+  Users,
+  BarChart3,
+  Bot,
+  Bell,
+  LogOut,
+  Search,
+  FileText,
+  Terminal,
+  Lock,
+  Radio,
+  User,
   Grid,
   Menu,
   X,
@@ -38,13 +38,13 @@ import RealDataDashboard from './components/RealDataDashboard.js';
 import OnboardingOverlay from './components/OnboardingOverlay.js';
 
 export default function App() {
-  const [viewState, setViewState] = useState<'landing' | 'login' | 'dashboard'>('login');
+  const [viewState, setViewState] = useState<'landing' | 'login' | 'dashboard'>('landing');
   const [currentTab, setCurrentTab] = useState<'overview' | 'events' | 'resources' | 'routes' | 'analytics' | 'ai-advisor'>('overview');
   const [bangaloreDataset, setBangaloreDataset] = useState<any[]>([]);
   const [hotspotData, setHotspotData] = useState<any[]>([]);
   const [datasetStats, setDatasetStats] = useState<any>(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
-  
+
   // App States synchronized with backend endpoints
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [events, setEvents] = useState<TrafficEvent[]>([]);
@@ -60,7 +60,7 @@ export default function App() {
     totalOfficers: 0,
     totalBarricades: 0
   });
-  
+
   // Interactive UI indicators
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
   const [globalSearchCode, setGlobalSearchCode] = useState('');
@@ -71,12 +71,14 @@ export default function App() {
 
   // Authenticate and load initial telemetry on mount
   useEffect(() => {
+    console.log('viewState changed to:', viewState);
     const token = localStorage.getItem('flowguard_token');
+    console.log('token found:', token);
     if (token) {
       fetchSessionProfile();
     }
     loadPlatformData();
-  }, [viewState]);
+  }, []);
 
   // Per-user onboarding trigger — fires when currentUser changes (on login)
   useEffect(() => {
@@ -258,11 +260,11 @@ export default function App() {
   const filteredSearchEvents = events.filter(e => {
     if (!globalSearchCode) return true;
     const cleanSearch = globalSearchCode.toLowerCase().trim();
-    
+
     // Direct matches
-    if (e.title.toLowerCase().includes(cleanSearch) || 
-        e.location.toLowerCase().includes(cleanSearch) ||
-        (e.description && e.description.toLowerCase().includes(cleanSearch))) {
+    if (e.title.toLowerCase().includes(cleanSearch) ||
+      e.location.toLowerCase().includes(cleanSearch) ||
+      (e.description && e.description.toLowerCase().includes(cleanSearch))) {
       return true;
     }
 
@@ -272,8 +274,8 @@ export default function App() {
       return searchTokens.some(token => {
         // Take the prefix of the search token (e.g., 'banner' or 'chinn') to catch spelling variations
         const prefix = token.substring(0, Math.min(token.length, 5));
-        return e.title.toLowerCase().includes(prefix) || 
-               e.location.toLowerCase().includes(prefix);
+        return e.title.toLowerCase().includes(prefix) ||
+          e.location.toLowerCase().includes(prefix);
       });
     }
 
@@ -290,24 +292,27 @@ export default function App() {
   const activePredObj = predictions.find(p => p.eventId === selectedEventId);
 
   // Return specific view portals
-  if (viewState === 'landing' || viewState === 'login') {
-    return <AuthPage onLoginSuccess={handleLoginSuccess} />;
-  }
+  if (viewState === 'landing') {
+  return <LandingPage onGoToLogin={() => setViewState('login')} />;
+}
+
+if (viewState === 'login') {
+  return <AuthPage onLoginSuccess={handleLoginSuccess} />;
+}
 
   // Active Role description mapping
-  const roleLabel = 
+  const roleLabel =
     currentUser?.role === 'admin' ? 'Traffic Administrator' :
-    currentUser?.role === 'officer' ? 'Field Officer (Beat Duty)' : 'Logistics Manager';
+      currentUser?.role === 'officer' ? 'Field Officer (Beat Duty)' : 'Logistics Manager';
 
   return (
     <div className="min-h-screen bg-[#070B14] text-gray-100 flex flex-col md:flex-row relative selection:bg-[#00C6FF]/30 select-none">
-      
+
       {/* SIDEBAR NAVIGATION GRID */}
-      <aside className={`w-full md:w-64 bg-[#0A0E1A] shrink-0 border-r border-white/5 flex flex-col justify-between p-4 z-40 transition-all ${
-        mobileMenuOpen ? 'fixed inset-0 bg-[#0A0E1A] block' : 'hidden md:flex'
-      }`}>
+      <aside className={`w-full md:w-64 bg-[#0A0E1A] shrink-0 border-r border-white/5 flex flex-col justify-between p-4 z-40 transition-all ${mobileMenuOpen ? 'fixed inset-0 bg-[#0A0E1A] block' : 'hidden md:flex'
+        }`}>
         <div className="space-y-6">
-          
+
           {/* Logo and Mobile closer */}
           <div className="flex justify-between items-center pb-4 border-b border-white/5">
             <div className="flex items-center gap-2.5">
@@ -327,9 +332,9 @@ export default function App() {
           {/* User profile capsule card */}
           {currentUser && (
             <div className="bg-slate-900/60 p-3.5 border border-white/10 rounded-xl flex items-center gap-2.5 bg-gradient-to-r from-slate-900 to-slate-950">
-              <img 
-                src={currentUser.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120'} 
-                alt="Profile Avatar" 
+              <img
+                src={currentUser.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120'}
+                alt="Profile Avatar"
                 className="w-10 h-10 rounded-full border border-white/10 shrink-0"
               />
               <div className="overflow-hidden">
@@ -359,61 +364,55 @@ export default function App() {
 
           {/* Nav List links */}
           <nav className="space-y-1 text-xs sm:text-xs">
-            <button 
+            <button
               onClick={() => { setCurrentTab('overview'); setMobileMenuOpen(false); }}
-              className={`w-full text-left px-3 py-2.5 rounded-lg font-mono flex items-center gap-2.5 transition ${
-                currentTab === 'overview' ? 'bg-[#00C6FF]/10 text-[#00C6FF] border border-[#00C6FF]/15 font-bold' : 'text-gray-400 hover:text-white hover:bg-white/[0.02]'
-              }`}
+              className={`w-full text-left px-3 py-2.5 rounded-lg font-mono flex items-center gap-2.5 transition ${currentTab === 'overview' ? 'bg-[#00C6FF]/10 text-[#00C6FF] border border-[#00C6FF]/15 font-bold' : 'text-gray-400 hover:text-white hover:bg-white/[0.02]'
+                }`}
             >
               <Grid className="w-4 h-4 shrink-0" />
               Command Dashboard
             </button>
 
-            <button 
+            <button
               onClick={() => { setCurrentTab('analytics'); setMobileMenuOpen(false); }}
-              className={`w-full text-left px-3 py-2.5 rounded-lg font-mono flex items-center gap-2.5 transition ${
-                currentTab === 'analytics' ? 'bg-[#00C6FF]/10 text-[#00C6FF] border border-[#00C6FF]/15 font-bold' : 'text-gray-400 hover:text-white hover:bg-white/[0.02]'
-              }`}
+              className={`w-full text-left px-3 py-2.5 rounded-lg font-mono flex items-center gap-2.5 transition ${currentTab === 'analytics' ? 'bg-[#00C6FF]/10 text-[#00C6FF] border border-[#00C6FF]/15 font-bold' : 'text-gray-400 hover:text-white hover:bg-white/[0.02]'
+                }`}
             >
               <BarChart3 className="w-4 h-4 shrink-0" />
               Data Intelligence
             </button>
 
-            <button 
+            <button
               onClick={() => { setCurrentTab('events'); setMobileMenuOpen(false); }}
-              className={`w-full text-left px-3 py-2.5 rounded-lg font-mono flex items-center gap-2.5 transition ${
-                currentTab === 'events' ? 'bg-[#00C6FF]/10 text-[#00C6FF] border border-[#00C6FF]/15 font-bold' : 'text-gray-400 hover:text-white hover:bg-white/[0.02]'
-              }`}
+              className={`w-full text-left px-3 py-2.5 rounded-lg font-mono flex items-center gap-2.5 transition ${currentTab === 'events' ? 'bg-[#00C6FF]/10 text-[#00C6FF] border border-[#00C6FF]/15 font-bold' : 'text-gray-400 hover:text-white hover:bg-white/[0.02]'
+                }`}
             >
               <Calendar className="w-4 h-4 shrink-0" />
               Event Operations
             </button>
 
-            <button 
+            <button
               onClick={() => { setCurrentTab('routes'); setMobileMenuOpen(false); }}
-              className={`w-full text-left px-3 py-2.5 rounded-lg font-mono flex items-center gap-2.5 transition ${
-                currentTab === 'routes' ? 'bg-[#00C6FF]/10 text-[#00C6FF] border border-[#00C6FF]/15 font-bold' : 'text-gray-400 hover:text-white hover:bg-white/[0.02]'
-              }`}
+              className={`w-full text-left px-3 py-2.5 rounded-lg font-mono flex items-center gap-2.5 transition ${currentTab === 'routes' ? 'bg-[#00C6FF]/10 text-[#00C6FF] border border-[#00C6FF]/15 font-bold' : 'text-gray-400 hover:text-white hover:bg-white/[0.02]'
+                }`}
             >
               <Navigation className="w-4 h-4 shrink-0" />
               Diversion Planner
             </button>
 
-            <button 
+            <button
               onClick={() => { setCurrentTab('resources'); setMobileMenuOpen(false); }}
-              className={`w-full text-left px-3 py-2.5 rounded-lg font-mono flex items-center gap-2.5 transition ${
-                currentTab === 'resources' ? 'bg-[#00C6FF]/10 text-[#00C6FF] border border-[#00C6FF]/15 font-bold' : 'text-gray-400 hover:text-white hover:bg-white/[0.02]'
-              }`}
+              className={`w-full text-left px-3 py-2.5 rounded-lg font-mono flex items-center gap-2.5 transition ${currentTab === 'resources' ? 'bg-[#00C6FF]/10 text-[#00C6FF] border border-[#00C6FF]/15 font-bold' : 'text-gray-400 hover:text-white hover:bg-white/[0.02]'
+                }`}
             >
               <Users className="w-4 h-4 shrink-0" />
               Resource Optimizer
             </button>
 
-            <button 
+            <button
               onClick={() => { setCurrentTab('ai-advisor'); setMobileMenuOpen(false); }}
-              className={`w-full text-left px-3 py-2.5 rounded-lg font-mono flex items-center gap-2.5 transition ${
-                currentTab === 'ai-advisor' ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/15 font-bold' : 'text-gray-400 hover:text-white hover:bg-white/[0.02]'
-              }`}
+              className={`w-full text-left px-3 py-2.5 rounded-lg font-mono flex items-center gap-2.5 transition ${currentTab === 'ai-advisor' ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/15 font-bold' : 'text-gray-400 hover:text-white hover:bg-white/[0.02]'
+                }`}
             >
               <Bot className="w-4 h-4 shrink-0 animate-pulse" />
               Gemini AI Chat Advisor
@@ -461,7 +460,7 @@ export default function App() {
             </div>
           )}
 
-          <button 
+          <button
             onClick={handleSignOut}
             className="w-full bg-slate-900 hover:bg-red-500/20 hover:text-red-400 border border-white/5 text-gray-400 text-xs py-2.5 rounded-lg transition flex items-center justify-center gap-2 cursor-pointer font-mono"
           >
@@ -473,19 +472,19 @@ export default function App() {
 
       {/* MAIN LAYOUT CANVAS */}
       <main className="flex-1 flex flex-col min-w-0 min-h-screen">
-        
+
         {/* TOP STATUS HEADER BAR */}
         <header className="bg-[#0A0E1A]/80 backdrop-blur-md border-b border-white/5 py-4 px-6 flex justify-between items-center z-30 sticky top-0">
-          
+
           <div className="flex items-center gap-2 md:gap-0">
             {/* Mobile menu toggle */}
             <button className="md:hidden text-gray-400 hover:text-white p-1" onClick={() => setMobileMenuOpen(true)}>
               <Menu className="w-5 h-5" />
             </button>
-            
+
             <div className="hidden sm:flex items-center gap-2.5 bg-slate-950/60 border border-white/10 rounded-xl px-3 py-1.5 w-64 md:w-80">
               <Search className="w-4 h-4 text-gray-500 shrink-0" />
-              <input 
+              <input
                 type="text"
                 value={globalSearchCode}
                 onChange={e => setGlobalSearchCode(e.target.value)}
@@ -501,7 +500,7 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-4">
-            
+
             {/* Status light */}
             <div className="hidden lg:flex items-center gap-2 bg-slate-950/40 border border-white/5 px-3 py-1.5 rounded-xl font-mono text-[10px]">
               <span className="w-2 h-2 bg-[#4CDE9A] rounded-full animate-pulse" />
@@ -510,7 +509,7 @@ export default function App() {
 
             {/* Notification alert bell dropdown system */}
             <div className="relative">
-              <button 
+              <button
                 onClick={() => setBellDropdownOpen(!bellDropdownOpen)}
                 className="relative p-2.5 bg-slate-900 border border-white/10 rounded-xl hover:border-white/20 transition text-gray-400 hover:text-white"
               >
@@ -528,24 +527,23 @@ export default function App() {
                     <span className="font-display font-semibold text-white">Active Dispatch Warnings</span>
                     <span className="text-[10px] text-[#00C6FF] font-mono">Real-Time Inflow</span>
                   </div>
-                  
+
                   <div className="space-y-2 max-h-64 overflow-y-auto">
                     {notifications.map((n) => (
-                      <div 
-                        key={n.id} 
+                      <div
+                        key={n.id}
                         onClick={() => { handleMarkNotifRead(n.id); if (n.eventId) setSelectedEventId(n.eventId); setBellDropdownOpen(false); }}
-                        className={`p-2.5 rounded-lg border cursor-pointer transition text-[11px] ${
-                          n.read 
-                            ? 'bg-slate-900/40 border-white/5 text-gray-400' 
-                            : 'bg-slate-900 border-[#FFB547]/20 text-white hover:border-[#00C6FF]/30'
-                        }`}
+                        className={`p-2.5 rounded-lg border cursor-pointer transition text-[11px] ${n.read
+                          ? 'bg-slate-900/40 border-white/5 text-gray-400'
+                          : 'bg-slate-900 border-[#FFB547]/20 text-white hover:border-[#00C6FF]/30'
+                          }`}
                       >
                         <div className="flex justify-between items-start mb-1 gap-1">
                           <span className="font-semibold block line-clamp-1">{n.title}</span>
                           {!n.read && <span className="w-1.5 h-1.5 bg-[#00C6FF] rounded-full shrink-0 mt-1" />}
                         </div>
                         <p className="m-0 leading-normal line-clamp-2 text-gray-400">{n.message}</p>
-                        <span className="text-[9px] text-gray-500 font-mono block mt-1">{new Date(n.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                        <span className="text-[9px] text-gray-500 font-mono block mt-1">{new Date(n.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                       </div>
                     ))}
                     {notifications.length === 0 && (
@@ -558,7 +556,7 @@ export default function App() {
 
             {/* Quick presets helper */}
             <div className="hidden sm:flex items-center gap-2">
-              <button 
+              <button
                 onClick={() => setShowOnboarding(true)}
                 className="bg-slate-900 hover:bg-[#7B61FF]/20 text-gray-400 hover:text-[#7B61FF] font-mono text-xs px-3 py-2 rounded-xl border border-white/10 hover:border-[#7B61FF]/40 transition flex items-center gap-1.5"
                 title="What is this? — View the quick guide"
@@ -566,7 +564,7 @@ export default function App() {
                 <HelpCircle className="w-3.5 h-3.5" />
                 What is this?
               </button>
-              <button 
+              <button
                 onClick={loadPlatformData}
                 disabled={reloadingData}
                 className="bg-slate-900 hover:bg-slate-800 text-gray-300 font-mono text-xs px-3.5 py-2 rounded-xl border border-white/10 hover:border-[#00C6FF]/40 transition flex items-center gap-1.5"
@@ -593,7 +591,7 @@ export default function App() {
 
         {/* INNER DENSE CONTENT AREA */}
         <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-6">
-          
+
           {/* Focus warning if some search code is on */}
           {globalSearchCode && (
             <div className="bg-[#00C6FF]/5 border border-[#00C6FF]/15 rounded-xl px-4 py-2.5 text-xs text-[#00C6FF] flex items-center gap-2">
@@ -606,7 +604,7 @@ export default function App() {
           {/* PRIMARY HIGH-FIDELITY SUMMARY HERO */}
           {currentTab === 'overview' && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-              
+
               {/* 1 */}
               <div className="glass-panel rounded-2xl p-5 border border-white/5 flex items-center justify-between">
                 <div>
@@ -660,10 +658,10 @@ export default function App() {
 
           {/* CORE ROW: INTERACTIVE TACTICAL MAP (PERSISTENT IN DOM) */}
           <div style={{ display: currentTab === 'overview' ? 'block' : 'none' }} className="mb-6">
-            <InteractiveMap 
-              events={filteredSearchEvents} 
-              selectedEventId={selectedEventId} 
-              onSelectEvent={setSelectedEventId} 
+            <InteractiveMap
+              events={filteredSearchEvents}
+              selectedEventId={selectedEventId}
+              onSelectEvent={setSelectedEventId}
               routes={routes}
               isVisible={currentTab === 'overview'}
               hotspotData={hotspotData}
@@ -676,30 +674,28 @@ export default function App() {
 
               {/* RE-ROUTING ANALYTIC SPLIT */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                
+
                 {/* AI Risk Score gauge block */}
                 <div className="glass-panel rounded-2xl p-6 border border-white/10 bg-slate-900/30 flex flex-col justify-between">
                   <div>
                     <span className="text-[#00C6FF] font-mono text-[10px] uppercase tracking-wider block mb-1">Dynamic Risk Profiling</span>
                     <h3 className="text-lg font-display font-semibold text-white my-0 mb-4">Municipal Risk Meter</h3>
-                    
+
                     {activeEventObj ? (
                       <div className="space-y-4">
                         <div className="flex justify-between items-center bg-slate-950/60 p-4 border border-white/5 rounded-xl">
                           <div>
                             <span className="text-slate-500 font-mono text-[10px] uppercase block">Assigned Risk Index</span>
-                            <span className={`text-2xl font-bold font-mono tracking-tight block ${
-                              activeEventObj.riskScore > 80 ? 'text-red-400' : 
+                            <span className={`text-2xl font-bold font-mono tracking-tight block ${activeEventObj.riskScore > 80 ? 'text-red-400' :
                               activeEventObj.riskScore > 50 ? 'text-amber-400' : 'text-cyan-400'
-                            }`}>
+                              }`}>
                               {activeEventObj.riskScore}% severity
                             </span>
                           </div>
-                          <div className={`text-xs font-mono px-3 py-1.5 rounded uppercase font-bold ${
-                            activeEventObj.severity === 'critical' ? 'bg-red-500/10 text-red-400 border border-red-500/20' :
+                          <div className={`text-xs font-mono px-3 py-1.5 rounded uppercase font-bold ${activeEventObj.severity === 'critical' ? 'bg-red-500/10 text-red-400 border border-red-500/20' :
                             activeEventObj.severity === 'high' ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' :
-                            'bg-[#00C6FF]/10 text-[#00C6FF] border border-[#00C6FF]/20'
-                          }`}>
+                              'bg-[#00C6FF]/10 text-[#00C6FF] border border-[#00C6FF]/20'
+                            }`}>
                             {activeEventObj.severity} Risk
                           </div>
                         </div>
@@ -711,14 +707,22 @@ export default function App() {
                             <span>Congested Limit</span>
                           </div>
                           <div className="w-full bg-slate-950 rounded-full h-2.5 overflow-hidden border border-white/5">
-                            <div 
-                              className={`h-full rounded-full transition-all duration-500 ${
-                                activeEventObj.riskScore > 80 ? 'bg-red-400' :
+                            <div
+                              className={`h-full rounded-full transition-all duration-500 ${activeEventObj.riskScore > 80 ? 'bg-red-400' :
                                 activeEventObj.riskScore > 50 ? 'bg-amber-400' : 'bg-[#00C6FF]'
-                              }`}
+                                }`}
                               style={{ width: `${activeEventObj.riskScore}%` }}
                             />
                           </div>
+                          <p className={`text-[11px] font-medium mt-2 m-0 font-sans ${activeEventObj.riskScore > 80 ? 'text-red-400' :
+                            activeEventObj.riskScore > 50 ? 'text-amber-400' : 'text-cyan-400'
+                            }`}>
+                            {activeEventObj.riskScore > 80
+                              ? '⚠ High risk — deploy additional officers before event starts'
+                              : activeEventObj.riskScore > 50
+                                ? '⚡ Moderate risk — activate standby units and monitor VMS feeds'
+                                : '✓ Low risk — standard monitoring, no extra deployment needed'}
+                          </p>
                         </div>
                       </div>
                     ) : (
@@ -732,8 +736,8 @@ export default function App() {
                     <div className="border-t border-white/5 pt-4 mt-6">
                       <span className="text-[10px] text-gray-500 font-mono uppercase block mb-1">RECOMMENDED COMMAND ACTIONS:</span>
                       <p className="text-xs text-gray-300 font-mono m-0 font-sans leading-normal">
-                        {activeEventObj.severity === 'critical' 
-                          ? '👉 Mobilize extra standby squad units inside sector immediately. Verify VMS displays detour routes.' 
+                        {activeEventObj.severity === 'critical'
+                          ? '👉 Mobilize extra standby squad units inside sector immediately. Verify VMS displays detour routes.'
                           : '👉 Regular gantry warnings initiated. Continue to sweep intersections with mobile police patrols.'}
                       </p>
                     </div>
@@ -780,7 +784,7 @@ export default function App() {
 
                   <div className="border-t border-white/5 pt-4 mt-6 flex justify-between items-center">
                     <span className="text-gray-500 text-[10px] font-mono">FLOWGUARD ADVICE ENGINE v3</span>
-                    <button 
+                    <button
                       onClick={() => setCurrentTab('ai-advisor')}
                       className="text-xs text-cyan-400 hover:underline flex items-center gap-1.5 font-mono"
                     >
@@ -807,19 +811,18 @@ export default function App() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10">
                   {bangaloreDataset.map((sensor, idx) => (
-                    <div 
-                      key={idx} 
+                    <div
+                      key={idx}
                       className="bg-slate-950/65 p-4 border border-white/5 hover:border-[#00C6FF]/35 transition-all duration-300 rounded-xl flex flex-col justify-between hover:translate-y-[-2px]"
                     >
                       <div>
                         {/* Sensor ID & Junction Header */}
                         <div className="flex justify-between items-start mb-2.5">
                           <span className="text-gray-500 font-mono text-[9px] uppercase tracking-widest">{sensor.sensorId}</span>
-                          <span className={`text-[10px] uppercase font-mono px-2 py-0.5 rounded font-bold ${
-                            sensor.congestionIndex > 90 ? 'bg-red-500/10 text-red-400' :
+                          <span className={`text-[10px] uppercase font-mono px-2 py-0.5 rounded font-bold ${sensor.congestionIndex > 90 ? 'bg-red-500/10 text-red-400' :
                             sensor.congestionIndex > 75 ? 'bg-amber-500/10 text-amber-400' :
-                            'bg-emerald-500/10 text-emerald-400'
-                          }`}>
+                              'bg-emerald-500/10 text-emerald-400'
+                            }`}>
                             Index: {sensor.congestionIndex}%
                           </span>
                         </div>
@@ -837,12 +840,11 @@ export default function App() {
                           </div>
                           <div>
                             <span className="text-[8px] text-gray-500 font-mono block">LIVE TREND</span>
-                            <span className={`text-xs font-mono font-medium capitalize block mt-0.5 ${
-                              sensor.trend === 'increasing' ? 'text-red-400' :
+                            <span className={`text-xs font-mono font-medium capitalize block mt-0.5 ${sensor.trend === 'increasing' ? 'text-red-400' :
                               sensor.trend === 'decreasing' ? 'text-emerald-400' : 'text-gray-400'
-                            }`}>
+                              }`}>
                               {sensor.trend === 'increasing' ? '▲ Inflow' :
-                               sensor.trend === 'decreasing' ? '▼ Clearance' : '■ Stable'}
+                                sensor.trend === 'decreasing' ? '▼ Clearance' : '■ Stable'}
                             </span>
                           </div>
                         </div>
@@ -860,8 +862,8 @@ export default function App() {
                       <div className="mt-4 pt-3 border-t border-white/5">
                         <div className="flex flex-wrap gap-1">
                           {sensor.affectedSectors.slice(0, 3).map((sec: string, sIdx: number) => (
-                            <span 
-                              key={sIdx} 
+                            <span
+                              key={sIdx}
                               className="text-[9px] font-mono bg-[#070B14] text-gray-400 px-2 py-0.5 rounded border border-white/5"
                             >
                               {sec}
@@ -884,7 +886,7 @@ export default function App() {
           )}
 
           {currentTab === 'events' && (
-            <EventCrud 
+            <EventCrud
               events={filteredSearchEvents}
               selectedEventId={selectedEventId}
               onSelectEvent={setSelectedEventId}
@@ -896,7 +898,7 @@ export default function App() {
           )}
 
           {currentTab === 'resources' && (
-            <ResourcePanel 
+            <ResourcePanel
               events={events}
               selectedEventId={selectedEventId}
               resourcePlans={resourcePlans}
@@ -905,7 +907,7 @@ export default function App() {
           )}
 
           {currentTab === 'routes' && (
-            <DiversionPlanner 
+            <DiversionPlanner
               events={events}
               selectedEventId={selectedEventId}
               routes={routes}
@@ -914,7 +916,7 @@ export default function App() {
           )}
 
           {currentTab === 'analytics' && (
-            <RealDataDashboard 
+            <RealDataDashboard
               datasetStats={datasetStats}
               auditLogs={auditLogs}
               currentUserRole={currentUser?.role || 'admin'}
@@ -922,7 +924,7 @@ export default function App() {
           )}
 
           {currentTab === 'ai-advisor' && (
-            <AIInsightsPanel 
+            <AIInsightsPanel
               selectedEventTitle={activeEventObj?.title}
               selectedEventLocation={activeEventObj?.location}
             />
@@ -933,7 +935,7 @@ export default function App() {
 
       {/* Onboarding Overlay — shows on first visit per user */}
       {showOnboarding && viewState === 'dashboard' && (
-        <OnboardingOverlay 
+        <OnboardingOverlay
           onDismiss={() => {
             setShowOnboarding(false);
             if (currentUser && currentUser.id) {

@@ -41,7 +41,26 @@ export default function DiversionPlanner({ events, selectedEventId, routes, curr
 
   return (
     <div className="space-y-6">
-      
+
+      {/* Empty state when no event is selected */}
+      {!activeEvent && (
+        <div className="glass-panel rounded-2xl p-10 border border-white/10 bg-slate-900/30 text-center">
+          <div className="w-16 h-16 bg-[#00C6FF]/10 border border-[#00C6FF]/20 rounded-2xl flex items-center justify-center mx-auto mb-5">
+            <Navigation className="w-8 h-8 text-[#00C6FF]" />
+          </div>
+          <h3 className="text-lg font-display font-semibold text-white mb-2">No Event Selected</h3>
+          <p className="text-gray-400 text-sm leading-relaxed max-w-md mx-auto mb-4">
+            Select or create an event from the <span className="text-[#00C6FF] font-medium">Event Operations</span> tab to see AI-generated diversion routes, bypass corridors, and transit fleet simulations.
+          </p>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-slate-950/60 border border-white/5 rounded-full text-xs text-gray-500 font-mono">
+            <HelpCircle className="w-3.5 h-3.5" />
+            Routes are generated automatically when an event is focused
+          </div>
+        </div>
+      )}
+
+      {activeEvent && (
+        <>
       {/* Overview Stat Widgets */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="glass-panel rounded-2xl p-5 border border-white/5 bg-slate-900/40">
@@ -256,6 +275,8 @@ export default function DiversionPlanner({ events, selectedEventId, routes, curr
 
       </div>
 
+        </>
+      )}
     </div>
   );
 }
